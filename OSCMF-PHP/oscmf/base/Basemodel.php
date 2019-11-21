@@ -20,5 +20,8 @@ use think\Model;
  */
 class Basemodel extends Model
 {
-
+    public function cate()
+    {
+        
+    }
 }
