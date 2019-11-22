@@ -19,5 +19,5 @@ class Index
     public function index()
     {
         return 2222111;
-    }
+
 }
