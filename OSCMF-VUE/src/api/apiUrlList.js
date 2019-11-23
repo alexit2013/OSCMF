@@ -1,3 +1,6 @@
+/**
+ * 所有的请求接口全部在此定义
+ */
 const api = {
   Login: '/auth/login',
   Logout: '/auth/logout',

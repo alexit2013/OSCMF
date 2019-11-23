@@ -1,4 +1,4 @@
-import api from './index'
+import api from './apiUrlList'
 import { axios } from '@/utils/request'
 
 /**
