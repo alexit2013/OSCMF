@@ -5,6 +5,6 @@
 
 return [
     'middleware'    =>    [
-        \app\middleware\AuthCheck::class,
+//        \app\middleware\AuthCheck::class,
     ],
 ];

@@ -1,25 +1,28 @@
 <?php
 // +----------------------------------------------------------------------
-// | OSCMF框架 [ 基于VUE和THINKPHP6的企业级管理系统 ]
+// | OSCMF框架 [ 基于VUE和THINKPHP6的企业级管理框架 ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2013-2017 http://www.oscmf.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: King < 091004081@163.com > 2019/11/17 10:47 下午
+// | Author: King < 091004081@163.com > 2019/11/24 8:49 下午
 // +----------------------------------------------------------------------
+
 
 namespace app\admin\controller;
 
-use oscmf\base\BaseController;
+use app\admin\AdminBase;
 
 /**
- * Class Index
+ * 用户
+ * Class User
  * @package app\admin\controller
- * @Author: King < 091004081@163.com > 2019/11/17 10:48 下午
+ * @Author: King < 091004081@163.com >
  */
-class Index extends BaseController
+class User extends AdminBase
 {
-    public function index()
+
+    public function login()
     {
-        return "后台页面";
+        return 121212;
     }
 }

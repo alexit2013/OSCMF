@@ -16,7 +16,7 @@ class AuthCheck
         $controller=$request->controller();
         $action=$request->action();
 
-        halt($request);
+        dump(12);
         return $next[$request];
     }
 
