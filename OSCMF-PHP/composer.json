@@ -28,7 +28,8 @@
     },
     "autoload": {
         "psr-4": {
-            "app\\": "app"
+            "app\\": "app",
+            "oscmf\\": "oscmf"
         },
         "psr-0": {
             "": "extend/"
