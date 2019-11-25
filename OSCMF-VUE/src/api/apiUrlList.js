@@ -2,8 +2,8 @@
  * 所有的请求接口全部在此定义
  */
 const api = {
-  Login: '/user/login',
-  Logout: '/auth/logout',
+  Login: '/admin/login',
+  Logout: '/admin/logout',
   ForgePassword: '/auth/forge-password',
   Register: '/auth/register',
   twoStepCode: '/auth/2step-code',
