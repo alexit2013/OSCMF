@@ -14,7 +14,7 @@ import { axios } from '@/utils/request'
  */
 export function login (parameter) {
   return axios({
-    url: 'http://oscmf.com/admin_api/user/login',
+    url: api.Login,
     method: 'post',
     data: parameter
   })

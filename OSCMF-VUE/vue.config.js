@@ -96,8 +96,8 @@ const vueConfig = {
     port: 8000,
     // 设置跨域地址
     proxy: {
-      '/api': {
-        target: 'http://oscmf.com/admin_api',
+      '/admin_api': {
+        target: 'http://oscmf.com',
         ws: false,
         changeOrigin: true
       }
