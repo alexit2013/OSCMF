@@ -4,19 +4,24 @@
 // +----------------------------------------------------------------------
 // | Copyright (c) 2013-2017 http://www.oscmf.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: King < 091004081@163.com > 2019/11/24 8:51 下午
+// | Author: King < 091004081@163.com > 2019/11/24 8:50 下午
 // +----------------------------------------------------------------------
 
 
-namespace app\model;
+namespace app\logic;
+
+use oscmf\base\BaseLogic;
 
 /**
- * 用户模型层
- * Class User
- * @package app\model
+ * 管理员逻辑层
+ * Class Admin
+ * @package app\logic
  * @Author: King < 091004081@163.com >
  */
-class User
+class Admin extends BaseLogic
 {
+    public function login()
+    {
 
+    }
 }

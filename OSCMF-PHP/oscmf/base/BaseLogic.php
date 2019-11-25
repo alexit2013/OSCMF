@@ -10,6 +10,10 @@
 
 namespace oscmf\base;
 
+use Firebase\JWT\JWT;
+use think\facade\Config;
+use think\facade\Db;
+
 /**
  * 逻辑层基类
  * Class BaseLogic
@@ -18,5 +22,46 @@ namespace oscmf\base;
  */
 class BaseLogic
 {
+    /**
+     * 生成token
+     * @param int $uid
+     * @return string
+     * @Author: King < 091004081@163.com >
+     */
+    public function createToken(int $uid):string
+    {
+        //获取JWT钥匙
+        $key=md5(Config::get('jwt.jwtKey'));
+        $param = [
+            "iss"=>"",  //签发者
+            "aud"=>"", //面象的用户
+            "iat" => time(), //签发时间
+            "exp" => time()+Config::get('jwt.timeOut'), //token 过期时间
+            "uid" => $uid //记录的userid的信息
+        ];
+        return JWT::encode($param,$key,Config::get('jwt.encryType'));
+    }
 
+    /**
+     * 开启事物
+     * @Author: King < 091004081@163.com >
+     */
+    public static function beginTrans()
+    {
+        Db::startTrans();
+    }
+
+    /**
+     * 检测是否可以提交事物
+     * @param $res
+     * @Author: King < 091004081@163.com >
+     */
+    public static function checkTrans($result)
+    {
+        if($result){
+            Db::commit();
+        }else{
+            Db::rollback();
+        }
+    }
 }

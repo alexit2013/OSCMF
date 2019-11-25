@@ -4,25 +4,24 @@
 // +----------------------------------------------------------------------
 // | Copyright (c) 2013-2017 http://www.oscmf.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: King < 091004081@163.com > 2019/11/24 8:49 下午
+// | Author: King < 091004081@163.com > 2019/11/24 8:51 下午
 // +----------------------------------------------------------------------
 
 
-namespace app\admin\controller;
+namespace app\model;
 
-use app\admin\AdminBase;
+use oscmf\base\Basemodel;
 
 /**
- * 用户
- * Class User
- * @package app\admin\controller
+ * 管理员模型层
+ * Class Admin
+ * @package app\model
  * @Author: King < 091004081@163.com >
  */
-class User extends AdminBase
+class Admin extends Basemodel
 {
-
     public function login()
     {
-        return 121212;
+
     }
 }
