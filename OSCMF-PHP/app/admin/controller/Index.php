@@ -20,6 +20,8 @@ class Index extends BaseController
 {
     public function index()
     {
+
         return "后台页面";
     }
+
 }
