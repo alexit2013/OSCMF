@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const createThemeColorReplacerPlugin = require('./config/plugin.config')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
@@ -10,7 +10,7 @@ function resolve (dir) {
  * check production or preview(pro.loacg.com only)
  * @returns {boolean}
  */
-function isProd () {
+function isProd() {
   return process.env.NODE_ENV === 'production'
 }
 
@@ -92,16 +92,16 @@ const vueConfig = {
   },
 
   devServer: {
-    // development server port 8000
-    port: 8000
-    // If you want to turn on the proxy, please remove the mockjs /src/main.jsL11
-    // proxy: {
-    //   '/api': {
-    //     target: 'https://mock.ihx.me/mock/5baf3052f7da7e07e04a5116/antd-pro',
-    //     ws: false,
-    //     changeOrigin: true
-    //   }
-    // }
+    // 端口号 8000
+    port: 8000,
+    // 设置跨域地址
+    proxy: {
+      '/admin_api': {
+        target: 'http://oscmf.com',
+        ws: false,
+        changeOrigin: true
+      }
+    }
   },
 
   // disable source map in production
