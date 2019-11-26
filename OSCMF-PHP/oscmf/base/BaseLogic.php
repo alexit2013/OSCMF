@@ -53,7 +53,7 @@ class BaseLogic
 
     /**
      * 检测是否可以提交事物
-     * @param $res
+     * @param $result
      * @Author: King < 091004081@163.com >
      */
     public static function checkTrans($result)
