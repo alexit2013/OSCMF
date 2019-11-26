@@ -20,8 +20,18 @@ use oscmf\base\Basemodel;
  */
 class Admin extends Basemodel
 {
-    public function login()
-    {
 
+    /**
+     * 通过用户名查询信息
+     * @param $username
+     * @return array|\think\Model|null
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @Author: King < 091004081@163.com >
+     */
+    public static function byUsernameToFind($username)
+    {
+        return self::where(['user_name'=>$username])->find();
     }
 }

@@ -11,6 +11,7 @@
 namespace app\logic;
 
 use oscmf\base\BaseLogic;
+use app\model\Admin as AdminModel;
 
 /**
  * 管理员逻辑层
@@ -20,8 +21,20 @@ use oscmf\base\BaseLogic;
  */
 class Admin extends BaseLogic
 {
-    public function login()
+    public static function login($params)
     {
-
+        $admins=AdminModel::byUsernameToFind($params['username']);
+        $data=[];
+        if($admins['id']){
+            if($params['password']==$admins['password']){
+                $data[]=self::createToken($admins['id']);
+            }else{
+                $data[]=failed("密码错误〜");
+            }
+        }else{
+            $data[]=failed('用户不存在〜');
+        }
+        return $data;
     }
+
 }

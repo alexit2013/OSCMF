@@ -11,7 +11,7 @@
 namespace oscmf\base;
 
 use think\Model;
-
+use think\facade\Db;
 /**
  * model基类
  * Class Basemodel
@@ -20,8 +20,16 @@ use think\Model;
  */
 class Basemodel extends Model
 {
-    public function cate()
+    /**
+     * 获取字段值
+     * @param string $table             表名
+     * @param array $where              条件
+     * @param bool|string $needField    需要获取的字段
+     * @return string
+     * @Author: King < 091004081@163.com >
+     */
+    public static function getValues(string $table,array $where=[],$needField):string
     {
-        
+        return Db::name($table)->where($where)->value($needField);
     }
 }

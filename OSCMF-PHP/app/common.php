@@ -8,3 +8,17 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+
+if(!function_exists('failed')){
+    function failed(string $msg,int $code=404):array
+    {
+        return compact('msg','code');
+    }
+}
+
+if(!function_exists('successful')){
+    function successful(string $msg,int $code=200):array
+    {
+        return compact('msg','code');
+    }
+}

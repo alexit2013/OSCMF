@@ -28,7 +28,7 @@ class BaseLogic
      * @return string
      * @Author: King < 091004081@163.com >
      */
-    public function createToken(int $uid):string
+    public static function createToken(int $uid):string
     {
         //获取JWT钥匙
         $key=md5(Config::get('jwt.jwtKey'));

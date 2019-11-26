@@ -11,7 +11,7 @@
 namespace app\admin\controller;
 
 use app\admin\AdminBase;
-use oscmf\base\BaseLogic;
+use app\logic\Admin as AdminLogic;
 
 /**
  * 管理员
@@ -21,12 +21,10 @@ use oscmf\base\BaseLogic;
  */
 class Admin extends AdminBase
 {
-
-    public function login(BaseLogic $baseLogic)
+    public function login()
     {
-        $params=$this->request->post();
-        $token=$baseLogic::createToken();
-
-        return json();
+        $params=$this->request->param();
+        $res=AdminLogic::login($params);
+        return json($res);
     }
 }
