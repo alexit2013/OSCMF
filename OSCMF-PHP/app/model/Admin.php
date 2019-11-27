@@ -14,7 +14,7 @@ use oscmf\base\Basemodel;
 
 /**
  * 管理员模型层
- * Class Admin
+ * Class AdminLogic
  * @package app\model
  * @Author: King < 091004081@163.com >
  */

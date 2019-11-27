@@ -11,11 +11,11 @@
 namespace app\admin\controller;
 
 use app\admin\AdminBase;
-use app\logic\Admin as AdminLogic;
+use app\logic\AdminLogic;
 
 /**
  * 管理员
- * Class Admin
+ * Class AdminLogic
  * @package app\admin\controller
  * @Author: King < 091004081@163.com >
  */

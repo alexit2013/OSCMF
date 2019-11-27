@@ -15,26 +15,25 @@ use app\model\Admin as AdminModel;
 
 /**
  * 管理员逻辑层
- * Class Admin
+ * Class AdminLogic
  * @package app\logic
  * @Author: King < 091004081@163.com >
  */
-class Admin extends BaseLogic
+class AdminLogic extends BaseLogic
 {
     public static function login($params)
     {
         $admins=AdminModel::byUsernameToFind($params['username']);
-        $data=[];
         if($admins['id']){
             if($params['password']==$admins['password']){
-                $data[]=self::createToken($admins['id']);
+                $token=self::createToken($admins['id']);
+                return successful("登陆成功！");
             }else{
-                $data[]=failed("密码错误〜");
+                return failed(['data'=>'失败']);
             }
         }else{
-            $data[]=failed('用户不存在〜');
+            return failed('用户不存在〜');
         }
-        return $data;
     }
 
 }

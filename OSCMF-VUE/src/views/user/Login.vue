@@ -13,7 +13,7 @@
         @change="handleTabClick"
       >
         <a-tab-pane key="tab1" tab="账号密码登录">
-          <a-alert v-if="isLoginError" type="error" showIcon style="margin-bottom: 24px;" message="账户或密码错误!" />
+          <a-alert v-if="isLoginError" type="error" showIcon style="margin-bottom: 24px;" :message="errorMessage" />
           <a-form-item>
             <a-input
               size="large"
@@ -128,7 +128,8 @@ export default {
         // login type: 0 email, 1 username, 2 telephone
         loginType: 0,
         smsSendBtn: false
-      }
+      },
+      errorMessage: '帐号密码不能为空!'
     }
   },
   created () {
@@ -173,7 +174,6 @@ export default {
 
       validateFields(validateFieldsKey, { force: true }, (err, values) => {
         if (!err) {
-          console.log('login form', values)
           const loginParams = { ...values }
           delete loginParams.username
           loginParams[!state.loginType ? 'email' : 'username'] = values.username
@@ -235,18 +235,6 @@ export default {
       })
     },
     loginSuccess (res) {
-      console.log(res)
-      // check res.homePage define, set $router.push name res.homePage
-      // Why not enter onComplete
-      /*
-      this.$router.push({ name: 'analysis' }, () => {
-        console.log('onComplete')
-        this.$notification.success({
-          message: '欢迎',
-          description: `${timeFix()}，欢迎回来`
-        })
-      })
-      */
       this.$router.push({ path: '/' })
       // 延迟 1 秒显示欢迎信息
       setTimeout(() => {
@@ -258,6 +246,7 @@ export default {
       this.isLoginError = false
     },
     requestFailed (err) {
+      console.log(err)
       this.isLoginError = true
       this.$notification['error']({
         message: '错误',
