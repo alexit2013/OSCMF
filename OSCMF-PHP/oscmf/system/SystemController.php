@@ -1,18 +1,18 @@
 <?php
 declare (strict_types = 1);
 
-namespace oscmf\base;
+namespace oscmf\system;
 
 use think\App;
 use think\exception\ValidateException;
 use think\Validate;
 /**
  * 控制器基类
- * Class BaseController
+ * Class SystemController
  * @package app
  * @Author: King < oscmf@163.com >
  */
-abstract class BaseController
+abstract class SystemController
 {
     /**
      * Request实例

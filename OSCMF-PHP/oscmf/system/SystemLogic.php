@@ -8,45 +8,69 @@
 // +----------------------------------------------------------------------
 
 
-namespace oscmf\base;
+namespace oscmf\system;
 
 use Firebase\JWT\JWT;
 use think\facade\Config;
 use think\facade\Db;
 
 /**
- * 逻辑层基类
- * Class BaseLogic
+ * 系统基础配置文件
+ * Class SystemLogic
  * @package oscmf\base
  * @Author: King < 091004081@163.com >
  */
-class BaseLogic
+class SystemLogic
 {
+    /**
+     * 成功
+     * @param string $msg 消息
+     * @param array $result 内容数据
+     * @param int $code 状态码
+     * @return array            返回一个数组
+     * @Author: King < 091004081@163.com >
+     */
+    public function successful(string $msg = '请求数据成功！',array $result = [],  int $code = 200): array
+    {
+        return compact('msg', 'code', 'result');
+    }
+
+    /**
+     * @param string $msg 消息
+     * @param int $code 状态码
+     * @return array            返回数组
+     * @Author: King < 091004081@163.com >
+     */
+    public function failed(string $msg='请求数据失败！', int $code = 404): array
+    {
+        return compact('msg', 'code');
+    }
+
     /**
      * 生成token
      * @param int $uid
      * @return string
      * @Author: King < 091004081@163.com >
      */
-    public static function createToken(int $uid):string
+    public function createToken(int $uid): string
     {
         //获取JWT钥匙
-        $key=md5(Config::get('jwt.jwtKey'));
+        $key = md5(Config::get('jwt.jwtKey'));
         $param = [
-            "iss"=>"",  //签发者
-            "aud"=>"", //面象的用户
+            "iss" => "",  //签发者
+            "aud" => "", //面象的用户
             "iat" => time(), //签发时间
-            "exp" => time()+Config::get('jwt.timeOut'), //token 过期时间
+            "exp" => time() + Config::get('jwt.timeOut'), //token 过期时间
             "uid" => $uid //记录的userid的信息
         ];
-        return JWT::encode($param,$key,Config::get('jwt.encryType'));
+        return JWT::encode($param, $key, Config::get('jwt.encryType'));
     }
 
     /**
      * 开启事物
      * @Author: King < 091004081@163.com >
      */
-    public static function beginTrans()
+    public function beginTrans()
     {
         Db::startTrans();
     }
@@ -56,11 +80,11 @@ class BaseLogic
      * @param $result
      * @Author: King < 091004081@163.com >
      */
-    public static function checkTrans($result)
+    public function checkTrans($result)
     {
-        if($result){
+        if ($result) {
             Db::commit();
-        }else{
+        } else {
             Db::rollback();
         }
     }

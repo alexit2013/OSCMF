@@ -10,7 +10,7 @@
 
 namespace app\model;
 
-use oscmf\base\Basemodel;
+use oscmf\system\SystemModel;
 
 /**
  * 管理员模型层
@@ -18,7 +18,7 @@ use oscmf\base\Basemodel;
  * @package app\model
  * @Author: King < 091004081@163.com >
  */
-class Admin extends Basemodel
+class Admin extends SystemModel
 {
 
     /**

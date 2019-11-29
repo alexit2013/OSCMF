@@ -21,10 +21,11 @@ use app\logic\AdminLogic;
  */
 class Admin extends AdminBase
 {
-    public function login()
+
+    public function login(AdminLogic $adminLogic)
     {
         $params=$this->request->param();
-        $res=AdminLogic::login($params);
+        $res=$adminLogic->login($params);
         return json($res);
     }
 }

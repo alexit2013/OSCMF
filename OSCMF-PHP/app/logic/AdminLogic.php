@@ -10,8 +10,8 @@
 
 namespace app\logic;
 
-use oscmf\base\BaseLogic;
-use app\model\Admin as AdminModel;
+use oscmf\system\SystemLogic;
+use app\model\Admin;
 
 /**
  * 管理员逻辑层
@@ -19,20 +19,29 @@ use app\model\Admin as AdminModel;
  * @package app\logic
  * @Author: King < 091004081@163.com >
  */
-class AdminLogic extends BaseLogic
+class AdminLogic extends SystemLogic
 {
-    public static function login($params)
+    /**
+     * 登陆逻辑
+     * @param $params
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @Author: King < 091004081@163.com >
+     */
+    public function login($params)
     {
-        $admins=AdminModel::byUsernameToFind($params['username']);
+        $admins=Admin::byUsernameToFind($params['username']);
         if($admins['id']){
             if($params['password']==$admins['password']){
-                $token=self::createToken($admins['id']);
-                return successful("登陆成功！");
+                $token=$this->createToken($admins['id']);
+                return $this->successful('登陆成功！',['token'=>$token]);
             }else{
-                return failed(['data'=>'失败']);
+                return $this->failed('帐号或密码错误！');
             }
         }else{
-            return failed('用户不存在〜');
+            return $this->failed('用户名不存在！');
         }
     }
 

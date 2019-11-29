@@ -8,17 +8,17 @@
 // +----------------------------------------------------------------------
 
 
-namespace oscmf\base;
+namespace oscmf\system;
 
 use think\Model;
 use think\facade\Db;
 /**
  * model基类
- * Class Basemodel
+ * Class SystemModel
  * @package oscmf\base
  * @Author: King < 091004081@163.com >
  */
-class Basemodel extends Model
+class SystemModel extends Model
 {
     /**
      * 获取字段值
