@@ -12,6 +12,7 @@ namespace app\admin\controller;
 
 use app\admin\AdminBase;
 use app\logic\AdminLogic;
+use think\App;
 
 /**
  * 管理员
@@ -21,11 +22,24 @@ use app\logic\AdminLogic;
  */
 class Admin extends AdminBase
 {
+    protected $adminLogic;
+    public function __construct(App $app,AdminLogic $adminLogic)
+    {
+        parent::__construct($app);
+        $this->adminLogic=$adminLogic;
+    }
 
-    public function login(AdminLogic $adminLogic)
+    public function login()
     {
         $params=$this->request->param();
-        $res=$adminLogic->login($params);
+        $res=$this->adminLogic->login($params);
         return json($res);
+    }
+
+    public function getUserInfo()
+    {
+        $token=$this->request->header('access-token');
+        $result=$this->adminLogic->getUserInfo($token);
+        return json($result);
     }
 }

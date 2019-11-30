@@ -93,4 +93,9 @@ abstract class SystemController
         return $v->failException(true)->check($data);
     }
 
+    public function returnMsg()
+    {
+
+    }
+
 }

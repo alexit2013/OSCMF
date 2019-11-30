@@ -30,19 +30,27 @@ class AdminLogic extends SystemLogic
      * @throws \think\db\exception\ModelNotFoundException
      * @Author: King < 091004081@163.com >
      */
-    public function login($params)
+    public function login(array $params)
     {
         $admins=Admin::byUsernameToFind($params['username']);
         if($admins['id']){
             if($params['password']==$admins['password']){
-                $token=$this->createToken($admins['id']);
-                return $this->successful('登陆成功！',['token'=>$token]);
+                $data['token']=$this->createToken($admins['id']);
+
+                return $this->successful('登陆成功！',$data);
             }else{
                 return $this->failed('帐号或密码错误！');
             }
         }else{
             return $this->failed('用户名不存在！');
         }
+    }
+
+    public function getUserInfo(string $token)
+    {
+        //检验token并获取用户UID
+        $uid=$this->checkToken($token);
+        return Admin::getUserOne($uid);
     }
 
 }

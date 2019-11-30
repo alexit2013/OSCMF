@@ -34,4 +34,9 @@ class Admin extends SystemModel
     {
         return self::where(['user_name'=>$username])->find();
     }
+
+    public static function getUserOne($uid)
+    {
+        return self::find($uid);
+    }
 }
