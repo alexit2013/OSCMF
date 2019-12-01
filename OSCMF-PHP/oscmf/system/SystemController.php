@@ -12,7 +12,7 @@ use think\Validate;
  * @package app
  * @Author: King < oscmf@163.com >
  */
-abstract class SystemController
+class SystemController
 {
     /**
      * Request实例
@@ -93,7 +93,7 @@ abstract class SystemController
         return $v->failException(true)->check($data);
     }
 
-    public function returnMsg()
+    public function returnData()
     {
 
     }

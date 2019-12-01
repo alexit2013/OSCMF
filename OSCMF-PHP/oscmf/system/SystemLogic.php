@@ -30,7 +30,7 @@ class SystemLogic
      * @return array            返回一个数组
      * @Author: King < 091004081@163.com >
      */
-    public function successful(string $msg = '请求数据成功！', array $result = [], int $code = 200): array
+    public function successNotice(string $msg = '请求数据成功！', array $result = [], int $code = 200): array
     {
         return compact('msg', 'code', 'result');
     }
@@ -41,7 +41,7 @@ class SystemLogic
      * @return array            返回数组
      * @Author: King < 091004081@163.com >
      */
-    public function failed(string $msg = '请求数据失败！', int $code = 404): array
+    public function failedNotice(string $msg = '请求数据失败！', int $code = 404): array
     {
         return compact('msg', 'code');
     }
@@ -75,7 +75,7 @@ class SystemLogic
     public function checkToken(string $token)
     {
         if (!$token) {
-            return $this->failed("token参数缺失");
+            return $this->failedNotice("token参数缺失");
         }
         //获取JWT钥匙
         $key = md5(Config::get('jwt.jwtKey'));
@@ -84,14 +84,16 @@ class SystemLogic
             $info = JWT::decode($token, $key, [Config::get('jwt.encryType')]);
         } catch (\Firebase\JWT\SignatureInvalidException $e) {
             //签名不正确
-            return $this->failed($e->getMessage());
+            return $this->failedNotice($e->getMessage());
         } catch (\Firebase\JWT\BeforeValidException $e) {
             //签名在某个时间点之后生效
-            return $this->failed($e->getMessage());
-        } catch (\Firebase\JWT\ExpiredException $e) {   //token过期
-            return $this->failed($e->getMessage());
-        } catch (Exception $e) {   //其它异常
-            return $this->failed($e->getMessage());
+            return $this->failedNotice($e->getMessage());
+        } catch (\Firebase\JWT\ExpiredException $e) {
+            //token过期
+            return $this->failedNotice($e->getMessage());
+        } catch (Exception $e) {
+            //其它异常
+            return $this->failedNotice($e->getMessage());
         }
         return $info->uid;
     }

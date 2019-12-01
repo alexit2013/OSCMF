@@ -35,8 +35,23 @@ class Admin extends SystemModel
         return self::where(['user_name'=>$username])->find();
     }
 
-    public static function getUserOne($uid)
+    public static function getUser($uid)
     {
         return self::find($uid);
+    }
+
+    public static function getUserAll()
+    {
+
+    }
+
+    public static function delUser()
+    {
+
+    }
+
+    public static function setUser()
+    {
+
     }
 }

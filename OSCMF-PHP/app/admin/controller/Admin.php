@@ -29,15 +29,29 @@ class Admin extends AdminBase
         $this->adminLogic=$adminLogic;
     }
 
+    /**
+     * 登陆
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @Author: King < 091004081@163.com >
+     */
     public function login()
     {
         $params=$this->request->param();
-        $res=$this->adminLogic->login($params);
-        return json($res);
+        $result=$this->adminLogic->login($params);
+        return json($result);
     }
 
+    /**
+     * 验证token并返回用户信息及权限
+     * @return \think\response\Json
+     * @Author: King < 091004081@163.com >
+     */
     public function getUserInfo()
     {
+        //接收token
         $token=$this->request->header('access-token');
         $result=$this->adminLogic->getUserInfo($token);
         return json($result);
