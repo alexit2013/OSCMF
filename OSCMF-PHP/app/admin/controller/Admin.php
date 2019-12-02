@@ -41,7 +41,7 @@ class Admin extends AdminBase
     {
         $params=$this->request->param();
         $result=$this->adminLogic->login($params);
-        return json($result);
+        return app('jsonReturn')->success();
     }
 
     /**
