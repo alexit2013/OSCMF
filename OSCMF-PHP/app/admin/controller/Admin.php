@@ -41,7 +41,7 @@ class Admin extends AdminBase
     {
         $params=$this->request->param();
         $result=$this->adminLogic->login($params);
-        return app('jsonReturn')->success();
+        return $result;
     }
 
     /**
@@ -53,7 +53,7 @@ class Admin extends AdminBase
     {
         //接收token
         $token=$this->request->header('access-token');
-        $result=$this->adminLogic->getUserInfo($token);
-        return json($result);
+        $result=$this->adminLogic->getUserInfo($token)->toArray();
+        return app('json')->checkResult($result);
     }
 }

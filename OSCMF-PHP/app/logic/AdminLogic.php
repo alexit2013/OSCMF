@@ -37,12 +37,12 @@ class AdminLogic extends SystemLogic
             if($params['password']==$admins['password']){
                 $data['token']=$this->createToken($admins['id']);
 
-                return $this->successNotice('登陆成功！',$data);
+                return app('json')->success('登陆成功！',$data);
             }else{
-                return $this->failedNotice('帐号或密码错误！');
+                return app('json')->fail('密码错误');
             }
         }else{
-            return $this->failedNotice('用户名不存在！');
+            return app('json')->fail('用户名不存在！');
         }
     }
 

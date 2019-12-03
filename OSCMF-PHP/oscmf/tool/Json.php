@@ -78,6 +78,21 @@ class Json
     }
 
     /**
+     * 根据返回结果判断是否成功
+     * @param array $data
+     * @return Response
+     * @Author: King < 091004081@163.com >
+     */
+    public function checkResult(array $data = [])
+    {
+        if (isset($data) && count($data)) {
+            return $this->success("请求数据成功！", $data);
+        } else {
+            return $this->fail("请求数据失败！");
+        }
+    }
+
+    /**
      * @param $status
      * @param $msg
      * @param array $result

@@ -235,7 +235,7 @@ export default {
       })
     },
     doLogin (res) {
-      if (res.code === 200) {
+      if (res.status === 200) {
         this.$router.push({ path: '/' })
         // 延迟 1 秒显示欢迎信息
         setTimeout(() => {
