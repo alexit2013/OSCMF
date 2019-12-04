@@ -13,12 +13,12 @@
         @change="handleTabClick"
       >
         <a-tab-pane key="tab1" tab="账号密码登录">
-          <a-alert v-if="isLoginError" type="error" showIcon style="margin-bottom: 24px;" message="账户或密码错误（admin/ant.design )" />
+          <a-alert v-if="isLoginError" type="error" showIcon style="margin-bottom: 24px;" :message="errorMessage" />
           <a-form-item>
             <a-input
               size="large"
               type="text"
-              placeholder="账户: admin"
+              placeholder="账户:"
               v-decorator="[
                 'username',
                 {rules: [{ required: true, message: '请输入帐户名或邮箱地址' }, { validator: handleUsernameOrEmail }], validateTrigger: 'change'}
@@ -33,7 +33,7 @@
               size="large"
               type="password"
               autocomplete="false"
-              placeholder="密码: admin or ant.design"
+              placeholder="密码:"
               v-decorator="[
                 'password',
                 {rules: [{ required: true, message: '请输入密码' }], validateTrigger: 'blur'}
@@ -128,7 +128,8 @@ export default {
         // login type: 0 email, 1 username, 2 telephone
         loginType: 0,
         smsSendBtn: false
-      }
+      },
+      errorMessage: '帐号密码不能为空!'
     }
   },
   created () {
@@ -173,13 +174,12 @@ export default {
 
       validateFields(validateFieldsKey, { force: true }, (err, values) => {
         if (!err) {
-          console.log('login form', values)
           const loginParams = { ...values }
           delete loginParams.username
           loginParams[!state.loginType ? 'email' : 'username'] = values.username
           loginParams.password = md5(values.password)
           Login(loginParams)
-            .then((res) => this.loginSuccess(res))
+            .then((res) => this.doLogin(res))
             .catch(err => this.requestFailed(err))
             .finally(() => {
               state.loginBtn = false
@@ -226,7 +226,7 @@ export default {
       })
     },
     stepCaptchaSuccess () {
-      this.loginSuccess()
+      this.doLogin()
     },
     stepCaptchaCancel () {
       this.Logout().then(() => {
@@ -234,30 +234,25 @@ export default {
         this.stepCaptchaVisible = false
       })
     },
-    loginSuccess (res) {
-      console.log(res)
-      // check res.homePage define, set $router.push name res.homePage
-      // Why not enter onComplete
-      /*
-      this.$router.push({ name: 'analysis' }, () => {
-        console.log('onComplete')
-        this.$notification.success({
-          message: '欢迎',
-          description: `${timeFix()}，欢迎回来`
-        })
-      })
-      */
-      this.$router.push({ path: '/' })
-      // 延迟 1 秒显示欢迎信息
-      setTimeout(() => {
-        this.$notification.success({
-          message: '欢迎',
-          description: `${timeFix()}，欢迎回来`
-        })
-      }, 1000)
-      this.isLoginError = false
+    doLogin (res) {
+      if (res.status === 200) {
+        this.$router.push({ path: '/' })
+        // 延迟 1 秒显示欢迎信息
+        setTimeout(() => {
+          this.$notification.success({
+            message: '欢迎',
+            description: `${timeFix()}，欢迎回来`
+          })
+        }, 1000)
+        this.isLoginError = false
+      } else {
+        // 登陆失败
+        this.isLoginError = true
+        this.errorMessage = res.msg
+      }
     },
     requestFailed (err) {
+      console.log(err)
       this.isLoginError = true
       this.$notification['error']({
         message: '错误',

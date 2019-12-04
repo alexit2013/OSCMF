@@ -9,14 +9,14 @@
 
 namespace app\admin\controller;
 
-use oscmf\base\BaseController;
+use oscmf\system\SystemController;
 
 /**
  * Class Index
  * @package app\admin\controller
  * @Author: King < 091004081@163.com > 2019/11/17 10:48 下午
  */
-class Index extends BaseController
+class Index extends SystemController
 {
     public function index()
     {

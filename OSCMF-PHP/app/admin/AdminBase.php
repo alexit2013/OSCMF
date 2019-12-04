@@ -10,7 +10,7 @@
 
 namespace app\admin;
 
-use oscmf\base\BaseController;
+use oscmf\system\SystemController;
 
 /**
  * ADMIN基类，所有的admin控制器必须继承该基类
@@ -18,7 +18,7 @@ use oscmf\base\BaseController;
  * @package app\admin
  * @Author: King < 091004081@163.com >
  */
-class AdminBase extends BaseController
+class AdminBase extends SystemController
 {
-
+    
 }

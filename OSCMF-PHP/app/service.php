@@ -4,25 +4,12 @@
 // +----------------------------------------------------------------------
 // | Copyright (c) 2013-2017 http://www.oscmf.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: King < 091004081@163.com > 2019/11/24 8:49 下午
+// | Author: King < 091004081@163.com > 2019/12/2 10:40 下午
 // +----------------------------------------------------------------------
 
-
-namespace app\admin\controller;
-
-use app\admin\AdminBase;
-
 /**
- * 用户
- * Class User
- * @package app\admin\controller
- * @Author: King < 091004081@163.com >
+ * 全局公共service文件
  */
-class User extends AdminBase
-{
-
-    public function login()
-    {
-        return 121212;
-    }
-}
+return [
+    \app\service\JsonService::class
+];

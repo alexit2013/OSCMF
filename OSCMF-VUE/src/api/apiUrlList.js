@@ -2,14 +2,16 @@
  * 所有的请求接口全部在此定义
  */
 const api = {
-  Login: '/user/login',
-  Logout: '/auth/logout',
+  // 登陆
+  Login: '/admin/login',
+  // 退出
+  Logout: '/admin/logout',
   ForgePassword: '/auth/forge-password',
   Register: '/auth/register',
   twoStepCode: '/auth/2step-code',
   SendSms: '/account/sms',
   SendSmsErr: '/account/sms_err',
-  // get my info
-  UserInfo: '/user/info'
+  // 获取用户信息
+  UserInfo: '/admin/getUserInfo'
 }
 export default api

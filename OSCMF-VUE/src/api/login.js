@@ -28,9 +28,12 @@ export function getSmsCaptcha (parameter) {
   })
 }
 
+/**
+ * 获取用户信息
+ */
 export function getInfo () {
   return axios({
-    url: '/user/info',
+    url: api.UserInfo,
     method: 'get',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'
