@@ -35,7 +35,7 @@ class AdminLogic extends SystemLogic
         $admins=Admin::byUsernameToFind($params['username']);
         if($admins['id']){
             if($params['password']==$admins['password']){
-                $data['token']=$this->createToken($admins['id']);
+                $data['token']=self::createToken($admins['id']);
 
                 return app('json')->success('登陆成功！',$data);
             }else{
@@ -50,7 +50,7 @@ class AdminLogic extends SystemLogic
     public function getUserInfo(string $token)
     {
         //检验token并获取用户UID
-        $uid=$this->checkToken($token);
+        $uid=self::checkToken($token);
         return Admin::getUser($uid);
     }
 
