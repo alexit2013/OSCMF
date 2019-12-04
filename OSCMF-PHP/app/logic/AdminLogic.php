@@ -51,7 +51,8 @@ class AdminLogic extends SystemLogic
     {
         //检验token并获取用户UID
         $uid=self::checkToken($token);
-        return Admin::getUser($uid);
+        $userInfo=Admin::getUser($uid)->toArray();
+        halt($userInfo);
     }
 
 }
