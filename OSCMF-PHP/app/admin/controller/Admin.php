@@ -40,7 +40,7 @@ class Admin extends AdminBase
      */
     public function login()
     {
-//        Enforcer::addRoleForUser('admin', 'super-admin');
+//        Enforcer::addRoleForUser(2, 'super-admin');
         $params=$this->request->param();
         $result=$this->adminLogic->login($params);
         return $result;

@@ -35,9 +35,18 @@ class Admin extends SystemModel
         return self::where(['user_name'=>$username])->find();
     }
 
+    /**
+     *
+     * @param $uid
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @Author: King < 091004081@163.com >
+     */
     public static function getUser($uid)
     {
-        return self::find($uid);
+        return self::find($uid)->toArray();
     }
 
     public static function getUserAll()
