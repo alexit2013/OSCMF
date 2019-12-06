@@ -22,29 +22,6 @@ use think\facade\Db;
  */
 class SystemLogic
 {
-    /**
-     * 成功
-     * @param string $msg 消息
-     * @param array $result 内容数据
-     * @param int $code 状态码
-     * @return array            返回一个数组
-     * @Author: King < 091004081@163.com >
-     */
-    public function successNotice(string $msg = '请求数据成功！', array $result = [], int $code = 200): array
-    {
-        return compact('msg', 'code', 'result');
-    }
-
-    /**
-     * @param string $msg 消息
-     * @param int $code 状态码
-     * @return array            返回数组
-     * @Author: King < 091004081@163.com >
-     */
-    public function failedNotice(string $msg = '请求数据失败！', int $code = 404): array
-    {
-        return compact('msg', 'code');
-    }
 
     /**
      * 生成token
@@ -52,7 +29,7 @@ class SystemLogic
      * @return string
      * @Author: King < 091004081@163.com >
      */
-    public function createToken(int $uid): string
+    public static function createToken(int $uid): string
     {
         //获取JWT钥匙
         $key = md5(Config::get('jwt.jwtKey'));
@@ -72,10 +49,10 @@ class SystemLogic
      * @return array
      * @Author: King < 091004081@163.com >
      */
-    public function checkToken(string $token)
+    public static function checkToken(string $token)
     {
         if (!$token) {
-            return $this->failedNotice("token参数缺失");
+            return app('json')->fail("token参数缺失");
         }
         //获取JWT钥匙
         $key = md5(Config::get('jwt.jwtKey'));
@@ -84,16 +61,16 @@ class SystemLogic
             $info = JWT::decode($token, $key, [Config::get('jwt.encryType')]);
         } catch (\Firebase\JWT\SignatureInvalidException $e) {
             //签名不正确
-            return $this->failedNotice($e->getMessage());
+            return app('json')->fail($e->getMessage());
         } catch (\Firebase\JWT\BeforeValidException $e) {
             //签名在某个时间点之后生效
-            return $this->failedNotice($e->getMessage());
+            return app('json')->fail($e->getMessage());
         } catch (\Firebase\JWT\ExpiredException $e) {
             //token过期
-            return $this->failedNotice($e->getMessage());
+            return app('json')->fail($e->getMessage());
         } catch (Exception $e) {
             //其它异常
-            return $this->failedNotice($e->getMessage());
+            return app('json')->fail($e->getMessage());
         }
         return $info->uid;
     }
@@ -102,7 +79,7 @@ class SystemLogic
      * 开启事物
      * @Author: King < 091004081@163.com >
      */
-    public function beginTrans()
+    public static function beginTrans()
     {
         Db::startTrans();
     }
@@ -112,7 +89,7 @@ class SystemLogic
      * @param $result
      * @Author: King < 091004081@163.com >
      */
-    public function checkTrans($result)
+    public static function checkTrans($result)
     {
         if ($result) {
             Db::commit();

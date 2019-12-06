@@ -12,6 +12,7 @@ namespace app\admin\controller;
 
 use app\admin\AdminBase;
 use app\logic\AdminLogic;
+use tauthz\facade\Enforcer;
 use think\App;
 
 /**
@@ -22,12 +23,6 @@ use think\App;
  */
 class Admin extends AdminBase
 {
-    protected $adminLogic;
-    public function __construct(App $app,AdminLogic $adminLogic)
-    {
-        parent::__construct($app);
-        $this->adminLogic=$adminLogic;
-    }
 
     /**
      * 登陆
@@ -39,8 +34,9 @@ class Admin extends AdminBase
      */
     public function login()
     {
+//        Enforcer::addRoleForUser(2, 'super-admin');
         $params=$this->request->param();
-        $result=$this->adminLogic->login($params);
+        $result=AdminLogic::login($params);
         return $result;
     }
 
@@ -53,7 +49,7 @@ class Admin extends AdminBase
     {
         //接收token
         $token=$this->request->header('access-token');
-        $result=$this->adminLogic->getUserInfo($token)->toArray();
+        $result=AdminLogic::getUserInfo($token);
         return app('json')->checkResult($result);
     }
 }
