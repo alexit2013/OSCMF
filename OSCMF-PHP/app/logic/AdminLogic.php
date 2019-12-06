@@ -30,7 +30,7 @@ class AdminLogic extends SystemLogic
      * @throws \think\db\exception\ModelNotFoundException
      * @Author: King < 091004081@163.com >
      */
-    public function login(array $params)
+    public static function login(array $params)
     {
         $admins=Admin::byUsernameToFind($params['username']);
         if($admins['id']){
@@ -47,7 +47,7 @@ class AdminLogic extends SystemLogic
     }
 
 
-    public function getUserInfo(string $token)
+    public static function getUserInfo(string $token)
     {
         //检验token并获取用户UID
         $uid=self::checkToken($token);
