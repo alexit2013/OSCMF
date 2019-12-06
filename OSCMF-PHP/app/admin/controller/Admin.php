@@ -26,15 +26,15 @@ class Admin extends AdminBase
 
     /**
      * 登陆
-     * @return \think\response\Json
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\DbException
-     * @throws \think\db\exception\ModelNotFoundException
+     * @return array
      * @Author: King < 091004081@163.com >
      */
     public function login()
     {
-//        Enforcer::addRoleForUser(2, 'super-admin');
+//        Enforcer::addPermissionForUser(1, 'cate','add','添加');
+//        Enforcer::addPermissionForUser(1, 'cate','edit','编');
+//        Enforcer::addPermissionForUser(1, 'cate','index','列表');
+//        Enforcer::addPermissionForUser(1, 'cate','del','删除');
         $params=$this->request->param();
         $result=AdminLogic::login($params);
         return $result;
@@ -42,7 +42,7 @@ class Admin extends AdminBase
 
     /**
      * 验证token并返回用户信息及权限
-     * @return \think\response\Json
+     * @return mixed
      * @Author: King < 091004081@163.com >
      */
     public function getUserInfo()

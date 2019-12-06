@@ -12,7 +12,7 @@ namespace app\logic;
 
 use oscmf\system\SystemLogic;
 use app\model\Admin;
-
+use tauthz\facade\Enforcer;
 /**
  * 管理员逻辑层
  * Class AdminLogic
@@ -23,11 +23,8 @@ class AdminLogic extends SystemLogic
 {
     /**
      * 登陆逻辑
-     * @param $params
-     * @return array
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\DbException
-     * @throws \think\db\exception\ModelNotFoundException
+     * @param array $params
+     * @return mixed
      * @Author: King < 091004081@163.com >
      */
     public static function login(array $params)
@@ -52,7 +49,14 @@ class AdminLogic extends SystemLogic
         //检验token并获取用户UID
         $uid=self::checkToken($token);
         $userInfo=Admin::getUser($uid);
-        halt($userInfo);
+        //获取权限
+        $_rules=Enforcer::getPermissionsForUser($userInfo['rule_id']);
+        $rules=[];
+        foreach ($_rules as $item){
+            $rules[$item['1']][]=$item;
+        }
+        halt(array_values($rules));
+        return $userInfo;
     }
 
 }
