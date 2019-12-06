@@ -2,7 +2,7 @@
 
 use think\migration\Migrator;
 use think\migration\db\Column;
-class CreateAdmin extends Migrator
+class CreateAdminTable extends Migrator
 {
     /**
      * Change Method.
@@ -30,12 +30,12 @@ class CreateAdmin extends Migrator
 
         $table = $this->table('admin', ['comment'=>'用户表','engine' => 'InnoDB', 'encoding' => 'utf8mb4', 'collation' => 'utf8mb4_unicode_ci']);
         $table
-            ->addColumn('admin_user_id', 'integer', ['limit' => 10, 'comment' => '用户'])
-            ->addColumn('name', 'string', ['limit' => 30, 'default' => '', 'comment' => '操作'])
-            ->addColumn('url', 'string', ['limit' => 100, 'default' => '', 'comment' => 'URL'])
-            ->addColumn('log_method', 'string', ['limit' => 8, 'default' => '不记录', 'comment' => '记录日志方法'])
-            ->addColumn('log_ip', 'string', ['limit' => 20, 'default' => '', 'comment' => '操作IP'])
-            ->addColumn('create_time', 'integer', ['limit' => 10, 'comment' => '操作时间'])
+            ->addColumn('admin_user_id', 'integer', ['limit' => 10,'null'=>true, 'comment' => '用户'])
+            ->addColumn('name', 'string', ['limit' => 30,'null'=>true, 'default' => '', 'comment' => '操作'])
+            ->addColumn('url', 'string', ['limit' => 100,'null'=>true, 'default' => '', 'comment' => 'URL'])
+            ->addColumn('log_method', 'string', ['limit' => 8,'null'=>true, 'default' => '不记录', 'comment' => '记录日志方法'])
+            ->addColumn('log_ip', 'string', ['limit' => 20,'null'=>true, 'default' => '', 'comment' => '操作IP'])
+            ->addColumn('create_time', 'integer', ['limit' => 10,'null'=>true, 'comment' => '操作时间'])
             ->create();
     }
 }
