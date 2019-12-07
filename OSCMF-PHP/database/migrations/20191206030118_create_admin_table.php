@@ -31,8 +31,8 @@ class CreateAdminTable extends Migrator
         $table = $this->table('admin', ['comment'=>'用户表','engine' => 'InnoDB', 'encoding' => 'utf8mb4', 'collation' => 'utf8mb4_unicode_ci']);
         $table
             ->addColumn('user_name', 'string', ['limit' => 150,'null'=>true, 'comment' => '用户名称'])
-            ->addColumn('password', 'string', ['limit' => 32,'null'=>true, 'default' => '', 'comment' => '用户密码'])
-            ->addColumn('mobile', 'string', ['limit' => 11,'null'=>true, 'default' => '', 'comment' => '手机号码'])
+            ->addColumn('password', 'char', ['limit' => 32,'null'=>true, 'default' => '', 'comment' => '用户密码'])
+            ->addColumn('mobile', 'char', ['limit' => 11,'null'=>true, 'default' => '', 'comment' => '手机号码'])
             ->addColumn('avatar', 'string', ['limit' => 255,'null'=>true, 'default' => '', 'comment' => '头像'])
             ->addColumn('lastLoginTime', 'integer', ['limit' => 11,'null'=>true, 'default' => 0, 'comment' => '最后登陆时间'])
             ->addColumn('rule_id', 'integer', ['limit' => 4,'null'=>true, 'default' => 0, 'comment' => '所属用户权限'])
