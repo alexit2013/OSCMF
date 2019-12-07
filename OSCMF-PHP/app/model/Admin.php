@@ -20,14 +20,16 @@ use oscmf\system\SystemModel;
  */
 class Admin extends SystemModel
 {
+    //关联角色组表
+    public function rulesGroup()
+    {
+        return $this->belongsTo(RulesGroup::class,'rule_id','id');
+    }
 
     /**
      * 通过用户名查询信息
      * @param $username
      * @return array|\think\Model|null
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\DbException
-     * @throws \think\db\exception\ModelNotFoundException
      * @Author: King < 091004081@163.com >
      */
     public static function byUsernameToFind($username)
@@ -36,17 +38,17 @@ class Admin extends SystemModel
     }
 
     /**
-     *
      * @param $uid
      * @return array
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\DbException
-     * @throws \think\db\exception\ModelNotFoundException
      * @Author: King < 091004081@163.com >
      */
     public static function getUser($uid)
     {
-        return self::find($uid)->toArray();
+        return self::with(
+            [
+                'rulesGroup'
+            ]
+        )->find($uid)->toArray();
     }
 
     public static function getUserAll()
