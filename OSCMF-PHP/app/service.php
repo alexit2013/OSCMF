@@ -11,6 +11,5 @@
  * 全局公共service文件
  */
 return [
-    \app\service\JsonService::class,
-    tauthz\TauthzService::class,
+    \app\service\JsonService::class
 ];

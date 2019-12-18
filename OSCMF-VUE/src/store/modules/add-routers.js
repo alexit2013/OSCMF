@@ -16,12 +16,13 @@ const permission = {
     }
   },
   actions: {
-    GenerateRoutes ({ commit }, data) {
+    getRouters ({ commit, getters }) {
+      // 获取用户登陆时存的权限，后台返回的数据已转换好格式
+      // console.log(getters.roles)
       return new Promise(resolve => {
-        const { token } = data
-        generatorDynamicRouter(token).then(routers => {
+        generatorDynamicRouter(getters.roles).then(routers => {
           commit('SET_ROUTERS', routers)
-          resolve()
+          resolve(routers)
         })
       })
     }
