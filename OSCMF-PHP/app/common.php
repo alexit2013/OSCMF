@@ -9,3 +9,20 @@
 
 // 应用公共文件
 
+if (!function_exists('objectToArr')) {
+    /**
+     * 对象转数组，如果对象为空，返回空数组
+     * @param $result
+     * @return array
+     * @Author: King < 091004081@163.com >
+     */
+    function objectToArr($result): array
+    {
+        if (!empty($result) && is_object($result)) {
+            $data = $result->toArray();
+        } else {
+            $data = [];
+        }
+        return $data;
+    }
+}

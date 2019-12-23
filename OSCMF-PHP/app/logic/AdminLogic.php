@@ -10,9 +10,9 @@
 
 namespace app\logic;
 
+use app\model\AuthRule;
 use oscmf\system\SystemLogic;
 use app\model\Admin;
-use tauthz\facade\Enforcer;
 /**
  * 管理员逻辑层
  * Class AdminLogic
@@ -49,13 +49,44 @@ class AdminLogic extends SystemLogic
         //检验token并获取用户UID
         $uid=self::checkToken($token);
         $userInfo=Admin::getUser($uid);
+        $rulesArr=explode(",",$userInfo['authGroup']['rules']);
         //获取权限
-        $_rules=Enforcer::getPermissionsForUser($userInfo['rule_id']);
         $rules=[];
-        foreach ($_rules as $item){
-            $rules[$item['1']][]=$item;
+
+        foreach ($rulesArr as $k => $v){
+            $rule=AuthRule::getAuthRule($v);
+            if($rule['pid']==0){
+                array_push($rules,$rule);
+            }
         }
-        halt(array_values($rules));
+        $_rules=[];
+        foreach ($rules as $k => $v){
+
+            $_rules[$v['module_id']]['name']=$v['authModule']['identifies'];
+            $_rules[$v['module_id']]['component']=$v['authModule']['component'];
+            $_rules[$v['module_id']]['redirect']="/".$v['authModule']['identifies']."/".$v['action'];
+            $_rules[$v['module_id']]['title']=$v['authModule']['name'];
+            $_rules[$v['module_id']]['key']=$v['authModule']['identifies'];
+            $_rules[$v['module_id']]['meta']=[
+                'icon'=>$v['authModule']['icon'],
+                'title'=>$v['authModule']['name'],
+                'show'=>true
+            ];
+            $_rules[$v['module_id']]['children'][]=[
+                'name'=>$v['action'],
+                'meta'=>[
+                    'title'=>$v['title'],
+                    'show'=>true,
+                ],
+                'component'=>$v['action'],
+                'key'=>$v['action'],
+            ];
+        }
+        $arr=[];
+        foreach ($_rules as $k => $v){
+            array_push($arr,$v);
+        }
+        $userInfo['rules']=$arr;
         return $userInfo;
     }
 

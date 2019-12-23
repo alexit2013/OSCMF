@@ -21,9 +21,9 @@ use oscmf\system\SystemModel;
 class Admin extends SystemModel
 {
     //关联角色组表
-    public function rulesGroup()
+    public function authGroup()
     {
-        return $this->belongsTo(RulesGroup::class,'rule_id','id');
+        return $this->belongsTo(AuthGroup::class, 'rule_id', 'id');
     }
 
     /**
@@ -34,7 +34,8 @@ class Admin extends SystemModel
      */
     public static function byUsernameToFind($username)
     {
-        return self::where(['user_name'=>$username])->find();
+        $result=self::where(['user_name' => $username])->find();
+        return objectToArr($result);
     }
 
     /**
@@ -44,11 +45,10 @@ class Admin extends SystemModel
      */
     public static function getUser($uid)
     {
-        return self::with(
-            [
-                'rulesGroup'
-            ]
-        )->find($uid)->toArray();
+        $result = self::with([
+            'authGroup'
+        ])->find($uid);
+        return objectToArr($result);
     }
 
     public static function getUserAll()

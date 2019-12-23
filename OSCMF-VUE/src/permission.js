@@ -26,8 +26,9 @@ router.beforeEach((to, from, next) => {
         store
           .dispatch('GetInfo')
           .then(res => {
-            const roles = res.data && res.data.rules
-            store.dispatch('getRouters', { roles }).then(() => {
+            console.log(res)
+            const roles = res.result && res.result.role
+            store.dispatch('GenerateRoutes', { roles }).then(() => {
               // 根据roles权限生成可访问的路由表
               // 动态添加可访问路由表
               router.addRoutes(store.getters.addRouters)
@@ -41,7 +42,8 @@ router.beforeEach((to, from, next) => {
               }
             })
           })
-          .catch(() => {
+          .catch((e) => {
+            console.log(e.message)
             notification.error({
               message: '错误',
               description: '请求用户信息失败，请重试'

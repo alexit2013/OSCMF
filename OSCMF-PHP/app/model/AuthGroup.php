@@ -4,16 +4,20 @@
 // +----------------------------------------------------------------------
 // | Copyright (c) 2013-2017 http://www.oscmf.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: King < 091004081@163.com > 2019/12/6 10:35 下午
+// | Author: King < 091004081@163.com > 2019/12/6 10:29 下午
 // +----------------------------------------------------------------------
 
 
 namespace app\model;
 
-
 use think\Model;
 
-class Rules extends Model
+/**
+ * Class AuthGroup
+ * @package app\model
+ * @Author: King < 091004081@163.com >
+ */
+class AuthGroup extends Model
 {
 
 }

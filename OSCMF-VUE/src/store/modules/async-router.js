@@ -3,7 +3,6 @@
  */
 import { constantRouterMap } from '@/config/router.config'
 import { generatorDynamicRouter } from '@/router/generator-routers'
-
 const permission = {
   state: {
     routers: constantRouterMap,
@@ -16,13 +15,11 @@ const permission = {
     }
   },
   actions: {
-    getRouters ({ commit, getters }) {
-      // 获取用户登陆时存的权限，后台返回的数据已转换好格式
-      // console.log(getters.roles)
+    GenerateRoutes ({ commit, getters }) {
       return new Promise(resolve => {
         generatorDynamicRouter(getters.roles).then(routers => {
           commit('SET_ROUTERS', routers)
-          resolve(routers)
+          resolve()
         })
       })
     }

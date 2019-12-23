@@ -1,4 +1,4 @@
-import api from './apiUrlList'
+import api from './index'
 import { axios } from '@/utils/request'
 
 /**
@@ -28,9 +28,6 @@ export function getSmsCaptcha (parameter) {
   })
 }
 
-/**
- * 获取用户信息
- */
 export function getInfo () {
   return axios({
     url: api.UserInfo,
@@ -50,7 +47,7 @@ export function getCurrentUserNav (token) {
 
 export function logout () {
   return axios({
-    url: '/auth/logout',
+    url: api.Logout,
     method: 'post',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'

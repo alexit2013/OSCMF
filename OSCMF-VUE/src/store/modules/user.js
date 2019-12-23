@@ -55,16 +55,15 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo().then(response => {
           const result = response.data
-          console.log(result)
-          // 判断是否获取用户角色组与权限
           if (result.rules && result.rules.length > 0) {
-            commit('SET_ROLES', result.rules)
+            const role = result.rules
+            commit('SET_ROLES', role)
             commit('SET_INFO', result)
           } else {
             reject(new Error('getInfo: roles must be a non-null array !'))
           }
 
-          commit('SET_NAME', { name: result.user_name, welcome: welcome() })
+          commit('SET_NAME', { name: result.name, welcome: welcome() })
           commit('SET_AVATAR', result.avatar)
 
           resolve(response)

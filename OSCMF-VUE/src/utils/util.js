@@ -1,6 +1,3 @@
-/**
- * 获取每天时刻
- */
 export function timeFix () {
   const time = new Date()
   const hour = time.getHours()

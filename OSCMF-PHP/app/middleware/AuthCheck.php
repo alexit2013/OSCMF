@@ -17,7 +17,7 @@ class AuthCheck
         $action=$request->action();
 
         dump(12);
-        return $next[$request];
+        return $next($request);
     }
 
     public function checkAuth()

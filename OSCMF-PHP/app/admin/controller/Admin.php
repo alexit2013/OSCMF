@@ -31,13 +31,14 @@ class Admin extends AdminBase
      */
     public function login()
     {
-//        Enforcer::addPermissionForUser(1, 'link','index','列表','链接','tool');
-//        Enforcer::addPermissionForUser(1, 'link','edit','编辑','链接','tool');
-//        Enforcer::addPermissionForUser(1, 'link','add','添加','链接','tool');
-//        Enforcer::addPermissionForUser(1, 'link','del','删除','链接','tool');
         $params=$this->request->param();
         $result=AdminLogic::login($params);
         return $result;
+    }
+
+    public function logout()
+    {
+        return app('json')->checkResult(['msg'=>'退出成功']);
     }
 
     /**
